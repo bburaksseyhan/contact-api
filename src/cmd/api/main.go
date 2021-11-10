@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/bburaksseyhan/contact-api/src/cmd/utils"
 	"github.com/bburaksseyhan/contact-api/src/pkg/server"
 	log "github.com/sirupsen/logrus"
@@ -10,6 +12,15 @@ import (
 func main() {
 
 	config := read()
+	log.Info("Config.yml", config.Database.Url)
+
+	mongoUri := os.Getenv("MONGODB_URL")
+
+	if mongoUri != "" {
+		config.Database.Url = mongoUri
+	}
+
+	log.Info("MONGODB_URL", mongoUri)
 
 	server.Init(config.Database.Url)
 }

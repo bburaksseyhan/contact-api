@@ -3,8 +3,8 @@ package server
 import (
 	"net/http"
 
-	"github.com/bburaksseyhan/contact-api/src/pkg/client/mongodb"
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 )
 
 func Init(url string) {
@@ -13,11 +13,13 @@ func Init(url string) {
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
 
-	mongodb.ConnectMongoDb("mongodb://localhost:27017")
+	//mongodb.ConnectMongoDb(url)
 
 	router.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Welcome to MongoDb Client Tutorial")
+		c.JSON(http.StatusOK, gin.H{"message": "Welcome to MongoDb Client Tutorial"})
 	})
+
+	log.Info("port is :8080", url)
 
 	// By default it serves on :8080 unless a
 	// PORT environment variable was defined.
