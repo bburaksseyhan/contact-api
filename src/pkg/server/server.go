@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Init() {
+func Init(url string) {
 
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware
@@ -15,7 +15,7 @@ func Init() {
 
 	mongodb.ConnectMongoDb("mongodb://localhost:27017")
 
-	router.GET("/ping", func(c *gin.Context) {
+	router.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "Welcome to MongoDb Client Tutorial")
 	})
 
