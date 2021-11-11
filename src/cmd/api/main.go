@@ -15,14 +15,20 @@ func main() {
 	log.Info("Config.yml", config.Database.Url)
 
 	mongoUri := os.Getenv("MONGODB_URL")
+	serverPort := os.Getenv("SERVER_PORT")
+	dbName := os.Getenv("DBNAME")
+	collection := os.Getenv("COLLECTION")
 
 	if mongoUri != "" {
 		config.Database.Url = mongoUri
+		config.Server.Port = serverPort
+		config.Database.DbName = dbName
+		config.Database.Collection = collection
 	}
 
 	log.Info("MONGODB_URL", mongoUri)
 
-	server.Init(config.Database.Url)
+	server.Init(config)
 }
 
 func read() utils.Configuration {

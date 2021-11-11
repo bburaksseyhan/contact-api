@@ -21,7 +21,7 @@ func main() {
 
 	defer contactsJson.Close()
 
-	var contacts []model.Contact
+	contacts := []model.Contact{}
 
 	byteValue, _ := ioutil.ReadAll(contactsJson)
 
@@ -38,7 +38,7 @@ func main() {
 
 	defer client.Disconnect(context.TODO())
 
-	collection := client.Database("ContactsService").Collection("contacts")
+	collection := client.Database("ContactDb").Collection("contacts")
 
 	logrus.Warn("Total data count:", &contacts)
 
