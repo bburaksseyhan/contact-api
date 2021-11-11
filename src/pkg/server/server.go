@@ -7,6 +7,7 @@ import (
 	repository "github.com/bburaksseyhan/contact-api/src/pkg/repository/mongodb"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -16,6 +17,7 @@ func Init(config utils.Configuration) {
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
 
+	logrus.Info("Init\n %+d", config)
 	client := mongodb.ConnectMongoDb(config.Database.Url)
 
 	repo := repository.NewContactRepository(&config, client)

@@ -12,21 +12,20 @@ import (
 func main() {
 
 	config := read()
-	log.Info("Config.yml", config.Database.Url)
 
 	mongoUri := os.Getenv("MONGODB_URL")
 	serverPort := os.Getenv("SERVER_PORT")
 	dbName := os.Getenv("DBNAME")
 	collection := os.Getenv("COLLECTION")
 
-	if mongoUri != "" {
+	if mongoUri != "" || serverPort != "" || dbName != "" || collection != "" {
 		config.Database.Url = mongoUri
 		config.Server.Port = serverPort
 		config.Database.DbName = dbName
 		config.Database.Collection = collection
 	}
 
-	log.Info("MONGODB_URL", mongoUri)
+	log.Info("MONGODB_URL\n", mongoUri)
 
 	server.Init(config)
 }

@@ -14,15 +14,15 @@ services:
       - "db.adminCommand('ping')"
     restart: unless-stopped
   
-  # contactapi:
-  #   build:
-  #     context: .
-  #     dockerfile: ./dockerfile
-  #   ports: 
-  #     - 8080:8080
-  #   restart: on-failure
-  #   env_file:
-  #      - .env
-  #   depends_on:
-  #     mongodb:
-  #       condition: service_healthy
+  contactapi:
+    build:
+      context: .
+      dockerfile: ./dockerfile
+    ports: 
+      - 8080:8080
+    restart: on-failure
+    env_file:
+       - .env
+    depends_on:
+      mongodb:
+        condition: service_healthy
